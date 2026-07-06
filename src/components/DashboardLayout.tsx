@@ -24,6 +24,7 @@ import {
 import { BRANCHES } from "@/utils/mockData";
 import { motion, AnimatePresence } from "framer-motion";
 import ChatBot from "./ChatBot";
+import { useBranch } from "@/context/BranchContext";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -39,6 +40,7 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const { businessDetails } = useBranch();
 
   const navigation = [
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
@@ -151,9 +153,9 @@ export default function DashboardLayout({
             <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#6C63FF] to-[#8B5CF6] flex items-center justify-center font-bold text-xs">
               SME
             </div>
-            <div className="hidden md:block">
-              <div className="text-xs font-semibold text-white">Store Admin</div>
-              <div className="text-[10px] text-text-secondary">{currentBranchName}</div>
+            <div className="hidden md:block text-left">
+              <div className="text-xs font-semibold text-white">{businessDetails.ownerName}</div>
+              <div className="text-[10px] text-text-secondary">{businessDetails.name} ({currentBranchName})</div>
             </div>
           </div>
         </div>

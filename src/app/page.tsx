@@ -99,7 +99,7 @@ export default function LandingPage() {
         </nav>
         <div className="flex items-center gap-4">
           <Link
-            href="/dashboard"
+            href="/login"
             className="px-4 py-2 bg-gradient-to-r from-[#6C63FF] to-[#8B5CF6] hover:shadow-lg hover:shadow-primary-app/20 hover:scale-102 transition-all rounded-xl text-xs font-extrabold text-white"
           >
             Launch Dashboard
@@ -143,7 +143,7 @@ export default function LandingPage() {
           className="flex justify-center gap-4 text-xs font-bold pt-4"
         >
           <Link
-            href="/dashboard"
+            href="/login"
             className="px-6 py-3.5 bg-gradient-to-r from-[#6C63FF] via-[#8B5CF6] to-[#00E5FF] rounded-xl hover:scale-105 hover:shadow-2xl transition-all flex items-center gap-1.5 text-white"
           >
             Start Free Trial <ArrowRight className="w-4 h-4" />
@@ -193,7 +193,7 @@ export default function LandingPage() {
               <span className="px-2 py-0.5 rounded bg-[#00E5FF]/15 text-[#00E5FF] text-[8px] uppercase font-bold tracking-widest border border-[#00E5FF]/20">Live Sync</span>
               <h3 className="text-lg md:text-2xl font-black text-white">Centralized Management Ledger</h3>
               <p className="text-xs text-text-secondary">Toggle inventory levels, GST parameters, and generate campaigns directly from your dashboard.</p>
-              <Link href="/dashboard" className="text-xs text-[#00E5FF] font-bold inline-flex items-center gap-1 hover:underline pt-2">
+              <Link href="/login" className="text-xs text-[#00E5FF] font-bold inline-flex items-center gap-1 hover:underline pt-2">
                 Simulate Dashboard live <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -446,7 +446,7 @@ export default function LandingPage() {
             </div>
             
             <Link
-              href="/dashboard"
+              href="/login"
               className="w-full py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white rounded-xl font-bold text-center block text-xs mt-6"
             >
               Choose growth plan
@@ -480,7 +480,7 @@ export default function LandingPage() {
             </div>
             
             <Link
-              href="/dashboard"
+              href="/login"
               className="w-full py-2.5 bg-gradient-to-r from-primary-app to-secondary-app text-white rounded-xl font-bold text-center block text-xs mt-6"
             >
               Choose Consolidated Pro
