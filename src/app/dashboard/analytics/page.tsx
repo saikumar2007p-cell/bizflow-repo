@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useBranch } from "@/context/BranchContext";
-import { BRANCHES } from "@/utils/mockData";
 import { TrendingUp, Sparkles, BarChart2, PieChart, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import {
@@ -22,14 +21,14 @@ import {
 } from "recharts";
 
 export default function AnalyticsDashboard() {
-  const { activeBranch } = useBranch();
+  const { activeBranch, branches } = useBranch();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const activeBranchData = BRANCHES.find((b) => b.id === activeBranch) || BRANCHES[0];
+  const activeBranchData = branches.find((b) => b.id === activeBranch) || branches[0];
 
   if (!isMounted) {
     return (
@@ -190,7 +189,7 @@ export default function AnalyticsDashboard() {
           </div>
 
           <div className="space-y-3 mt-4 text-xs">
-            {BRANCHES.map((b) => {
+            {branches.map((b) => {
               const profitPercentage = ((b.revenue - b.expenses) / b.revenue) * 100;
               return (
                 <div key={b.id} className="p-3 bg-white/3 border border-white/5 rounded-xl space-y-2.5">

@@ -1,25 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useBranch } from "@/context/BranchContext";
-import { INVENTORY } from "@/utils/mockData";
 import { Package, Search, Plus, AlertTriangle, Sparkles, Filter, Database, Edit } from "lucide-react";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import confetti from "canvas-confetti";
 
 export default function InventoryDashboard() {
-  const { activeBranch } = useBranch();
-  const [localInventory, setLocalInventory] = useState(INVENTORY);
+  const { activeBranch, inventory: localInventory, setInventory: setLocalInventory } = useBranch();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showAddStockModal, setShowAddStockModal] = useState(false);
   const [selectedItemForEdit, setSelectedItemForEdit] = useState<any>(null);
   const [editQtyValue, setEditQtyValue] = useState(0);
-
-  useEffect(() => {
-    setLocalInventory(INVENTORY);
-  }, []);
 
   const branchInventory = localInventory.filter((i) => i.branch === activeBranch);
 

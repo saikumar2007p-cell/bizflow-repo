@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useBranch } from "@/context/BranchContext";
-import { BRANCHES, ORDERS, INVENTORY } from "@/utils/mockData";
 import {
   TrendingUp,
   DollarSign,
@@ -30,7 +29,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function DashboardOverview() {
-  const { activeBranch } = useBranch();
+  const { activeBranch, branches, orders, inventory } = useBranch();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -38,9 +37,9 @@ export default function DashboardOverview() {
   }, []);
 
   // Find data for active branch
-  const activeBranchData = BRANCHES.find((b) => b.id === activeBranch) || BRANCHES[0];
-  const branchOrders = ORDERS.filter((o) => o.branch === activeBranch);
-  const branchLowStock = INVENTORY.filter((i) => i.branch === activeBranch && i.stock < i.minStock);
+  const activeBranchData = branches.find((b) => b.id === activeBranch) || branches[0];
+  const branchOrders = orders.filter((o) => o.branch === activeBranch);
+  const branchLowStock = inventory.filter((i) => i.branch === activeBranch && i.stock < i.minStock);
 
   if (!isMounted) {
     // Beautiful Loading Skeleton

@@ -5,6 +5,7 @@ import { MessageSquare, Send, Bot, Sparkles, X, Mic } from "lucide-react";
 import { getResponse } from "@/utils/mockData";
 import { motion, AnimatePresence } from "framer-motion";
 import VoiceController from "./VoiceController";
+import { useBranch } from "@/context/BranchContext";
 
 interface ChatMessage {
   id: string;
@@ -19,6 +20,7 @@ interface ChatBotProps {
 
 export default function ChatBot({ branch }: ChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { branches, inventory, customers } = useBranch();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -55,7 +57,7 @@ export default function ChatBot({ branch }: ChatBotProps) {
 
     // Simulate thinking and answer
     setTimeout(() => {
-      const replyText = getResponse(textToSend, branch);
+      const replyText = getResponse(textToSend, branch, branches, inventory, customers);
       const aiMsg: ChatMessage = {
         id: Math.random().toString(),
         sender: "ai",

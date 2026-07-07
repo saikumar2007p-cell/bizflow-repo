@@ -1,19 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useBranch } from "@/context/BranchContext";
-import { EMPLOYEES } from "@/utils/mockData";
 import { UserCheck, Sparkles, AlertTriangle, ShieldCheck, Mail, Edit, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 
 export default function EmployeeManagement() {
-  const { activeBranch } = useBranch();
-  const [localEmployees, setLocalEmployees] = useState(EMPLOYEES);
-
-  useEffect(() => {
-    setLocalEmployees(EMPLOYEES);
-  }, []);
+  const { activeBranch, employees: localEmployees, setEmployees: setLocalEmployees } = useBranch();
 
   const branchEmployees = localEmployees.filter((e) => e.branch === activeBranch);
 

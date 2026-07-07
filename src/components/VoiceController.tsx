@@ -4,6 +4,7 @@ import { useVoiceAssistant } from "@/hooks/useVoiceAssistant";
 import { Mic, MicOff, Volume2, Sparkles, AlertTriangle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getResponse } from "@/utils/mockData";
+import { useBranch } from "@/context/BranchContext";
 
 interface VoiceControllerProps {
   branch: string;
@@ -12,10 +13,11 @@ interface VoiceControllerProps {
 
 export default function VoiceController({ branch, onResponse }: VoiceControllerProps) {
   const [activeCommand, setActiveCommand] = useState("");
+  const { branches, inventory, customers } = useBranch();
   
   const handleVoiceCommand = (command: string) => {
     setActiveCommand(command);
-    const reply = getResponse(command, branch);
+    const reply = getResponse(command, branch, branches, inventory, customers);
     onResponse(reply, command);
     speakText(reply);
   };

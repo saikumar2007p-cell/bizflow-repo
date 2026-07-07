@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useBranch } from "@/context/BranchContext";
-import { ORDERS, INVENTORY } from "@/utils/mockData";
 import { ShoppingBag, Search, Plus, Trash2, Printer, CheckCircle, Sparkles, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
@@ -15,8 +14,7 @@ interface InvoiceItem {
 }
 
 export default function InvoicingOrders() {
-  const { activeBranch } = useBranch();
-  const [localOrders, setLocalOrders] = useState(ORDERS);
+  const { activeBranch, orders: localOrders, setOrders: setLocalOrders, inventory: branchInventorySource } = useBranch();
   const [customerName, setCustomerName] = useState("");
   const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);
   
@@ -24,11 +22,7 @@ export default function InvoicingOrders() {
   const [selectedProduct, setSelectedProduct] = useState("");
   const [productQty, setProductQty] = useState(1);
 
-  useEffect(() => {
-    setLocalOrders(ORDERS);
-  }, []);
-
-  const branchInventory = INVENTORY.filter(i => i.branch === activeBranch);
+  const branchInventory = branchInventorySource.filter(i => i.branch === activeBranch);
   const branchOrders = localOrders.filter(o => o.branch === activeBranch);
 
   const handleAddItem = () => {

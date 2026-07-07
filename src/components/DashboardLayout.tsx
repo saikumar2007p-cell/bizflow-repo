@@ -21,7 +21,6 @@ import {
   X,
   Volume2
 } from "lucide-react";
-import { BRANCHES } from "@/utils/mockData";
 import { motion, AnimatePresence } from "framer-motion";
 import ChatBot from "./ChatBot";
 import { useBranch } from "@/context/BranchContext";
@@ -40,7 +39,6 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
-  const { businessDetails } = useBranch();
 
   const navigation = [
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
@@ -54,7 +52,9 @@ export default function DashboardLayout({
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
 
-  const currentBranchName = BRANCHES.find(b => b.id === activeBranch)?.name || "Delhi HQ";
+  const { businessDetails, branches } = useBranch();
+
+  const currentBranchName = branches.find(b => b.id === activeBranch)?.name || "Delhi HQ";
 
   const notifications = [
     { id: 1, text: "AI Alert: Low stock detected in Suede Loafers (Mumbai)", type: "warning" },
@@ -92,7 +92,7 @@ export default function DashboardLayout({
               onChange={(e) => setActiveBranch(e.target.value)}
               className="bg-transparent text-white font-semibold focus:outline-none cursor-pointer"
             >
-              {BRANCHES.map((b) => (
+              {branches.map((b) => (
                 <option key={b.id} value={b.id} className="bg-[#050816] text-white">
                   {b.name}
                 </option>
@@ -235,7 +235,7 @@ export default function DashboardLayout({
                       onChange={(e) => setActiveBranch(e.target.value)}
                       className="bg-transparent text-white font-semibold focus:outline-none cursor-pointer"
                     >
-                      {BRANCHES.map((b) => (
+                      {branches.map((b) => (
                         <option key={b.id} value={b.id} className="bg-[#050816] text-white">
                           {b.name}
                         </option>

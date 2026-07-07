@@ -1,26 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useBranch } from "@/context/BranchContext";
-import { CUSTOMERS } from "@/utils/mockData";
 import { Users, AlertTriangle, Search, Plus, Sparkles, Filter, Mail, Phone, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 
 export default function CRMCustomers() {
-  const { activeBranch } = useBranch();
+  const { activeBranch, customers: localCustomers, setCustomers: setLocalCustomers } = useBranch();
   const [filterRisk, setFilterRisk] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
   const [newCustName, setNewCustName] = useState("");
   const [newCustPhone, setNewCustPhone] = useState("");
   const [newCustEmail, setNewCustEmail] = useState("");
-  const [localCustomers, setLocalCustomers] = useState(CUSTOMERS);
-
-  // Sync state on load
-  useEffect(() => {
-    setLocalCustomers(CUSTOMERS);
-  }, []);
 
   const branchCustomers = localCustomers.filter((c) => c.branch === activeBranch);
 
